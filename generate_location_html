@@ -1,0 +1,28 @@
+import os
+
+# Data with corresponding longitude, latitude, and data value
+data = [
+    ("Van der Kaaijstraat 64, 1815 VM Alkmaar", "Alkmaar", 52.6359645, 4.734916699999999, 13),
+    ("Bedrijvenpark Twente 305, 7602 KL Almelo", "Almelo", 52.3686296, 6.6119287, 43),
+    ("Markerkant 13-10, 1314 AN Almere", "Almere", 52.3836843, 5.212981399999999, 7),
+    # Add more locations
+]
+
+# Sort data alphabetically by the location name
+data.sort(key=lambda x: x[1])
+
+location_list_items = []
+
+for address, location_name, latitude, longitude, data_value in data:
+    list_item = f'<li data-address="{address}" data-longitude="{longitude:.4f}" data-latitude="{latitude:.4f}" data-value="{data_value}">{location_name} ({address})</li>'
+    location_list_items.append(list_item)
+
+# Write the generated list items to an HTML file
+output_file_path = os.path.expanduser('~/Downloads/location_list.html')
+with open(output_file_path, 'w') as file:
+    for item in location_list_items:
+        file.write(f'{item}\n')
+
+# Print all generated list items
+for item in location_list_items:
+    print(item)
